@@ -1,0 +1,1 @@
+cmd_/home/kjlsai/Code/f1c200s/Drivers/4/demo.ko := arm-linux-gnueabi-ld -r -EL --build-id  -T ./scripts/module-common.lds -o /home/kjlsai/Code/f1c200s/Drivers/4/demo.ko /home/kjlsai/Code/f1c200s/Drivers/4/demo.o /home/kjlsai/Code/f1c200s/Drivers/4/demo.mod.o;  true
