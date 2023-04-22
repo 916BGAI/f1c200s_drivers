@@ -39,10 +39,10 @@ static irqreturn_t key_irq_handler(int irq, void *dev_id)
 
 	if (gpiod_get_value(key->pin) == 1) {
 		input_report_key(key->input_dev, KEY_0, 0);
-        input_sync(key->input_dev);
-    } else if (gpiod_get_value(key->pin) == 0) {
+		input_sync(key->input_dev);
+	} else if (gpiod_get_value(key->pin) == 0) {
 		input_report_key(key->input_dev, KEY_0, 1);
-        input_sync(key->input_dev);
+		input_sync(key->input_dev);
 	}
 
 	return IRQ_RETVAL(IRQ_HANDLED);
@@ -65,9 +65,9 @@ static int key_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to allocate the input device\r\n");
 		return -ENOMEM;
 	}
-	set_bit(EV_KEY,input_dev->evbit);
-	set_bit(EV_REP,input_dev->evbit);
-	set_bit(KEY_0,input_dev->keybit);
+	set_bit(EV_KEY, input_dev->evbit);
+	set_bit(EV_REP, input_dev->evbit);
+	set_bit(KEY_0, input_dev->keybit);
 	input_dev->name = dev_name(&pdev->dev);
 	input_dev->phys = "key/input0";
 	input_dev->open = NULL;
@@ -77,13 +77,13 @@ static int key_probe(struct platform_device *pdev)
 	input_dev->id.product = 0x0001;
 	input_dev->id.version = 0x0100;
 	ret = input_register_device(input_dev);
-    if (ret < 0) {
+	if (ret < 0) {
 		input_free_device(input_dev);
 		devm_free_irq(&pdev->dev, key->irq, key);
 		devm_gpiod_put(&pdev->dev, key->pin);
 		dev_err(&pdev->dev, "error registering input device\r\n");
 		return -ENOMEM;
-    }
+	}
 
 	key->input_dev = input_dev;
 
